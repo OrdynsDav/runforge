@@ -1,0 +1,58 @@
+.run-card {
+  display: grid;
+  grid-template-columns: var(--runs-columns);
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--color-border-subtle, #e1dbcf);
+  border-radius: 0.75rem;
+  background: var(--color-card, #fbf9f4);
+  color: var(--color-text, #0b1a33);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.run-card:hover {
+  border-color: var(--color-text, #0b1a33);
+}
+
+.run-card:focus-visible {
+  outline: 2px solid var(--color-text, #0b1a33);
+  outline-offset: 2px;
+}
+
+.run-card--selected {
+  background: var(--color-card-selected, #f7f4ee);
+  border-color: var(--color-accent, #0b1a33);
+}
+
+/* 700px */
+@media (max-width: 43.75rem) {
+  .run-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name badge"
+      "repo repo"
+      "created duration";
+    gap: 0.5rem 0.75rem;
+  }
+
+  .run-card__name {
+    grid-area: name;
+  }
+  .run-card__repo {
+    grid-area: repo;
+  }
+  .run-card .status-badge {
+    grid-area: badge;
+  }
+  .run-card__created {
+    grid-area: created;
+  }
+  .run-card__duration {
+    grid-area: duration;
+    justify-self: end;
+  }
+}

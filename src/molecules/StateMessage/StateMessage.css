@@ -1,0 +1,28 @@
+.state-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 3rem 1.5rem;
+  border: 1px dashed var(--color-border-strong, #c9c2b4);
+  border-radius: 0.75rem;
+  text-align: center;
+}
+
+.state-message__action {
+  margin-top: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border: 1px solid var(--color-accent, #0b1a33);
+  border-radius: 0.75rem;
+  background: var(--color-accent, #0b1a33);
+  color: var(--color-on-accent, #f4f1eb);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.state-message__action:focus-visible {
+  outline: 2px solid var(--color-text, #0b1a33);
+  outline-offset: 2px;
+}

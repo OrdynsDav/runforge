@@ -1,0 +1,33 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  width: fit-content;
+  padding: 0.1875rem 0.625rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+
+/* двойной класс, чтобы цвет перебивал .text из Text.css независимо от порядка подключения */
+.status-badge.status-badge--queued {
+  border: 1px dashed #7d8597;
+  color: #3d4659;
+}
+
+.status-badge.status-badge--running {
+  border-color: var(--color-accent, #0b1a33);
+  background: #e3e9f7;
+  color: var(--color-text, #0b1a33);
+}
+
+.status-badge.status-badge--succeeded {
+  border-color: #68c997;
+  background: #68c997;
+  color: var(--color-on-accent, #f4f1eb);
+}
+
+.status-badge.status-badge--failed {
+  border-color: var(--color-danger, #9b1c1c);
+  background: #fff;
+  color: var(--color-danger, #9b1c1c);
+}

@@ -1,0 +1,24 @@
+.runs-section__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.runs-section__skeleton-row {
+  height: 4rem;
+  border-radius: 0.75rem;
+  background: var(--color-border-subtle, #e1dbcf);
+  animation: runs-section-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes runs-section-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .runs-section__skeleton-row {
+    animation: none;
+  }
+}

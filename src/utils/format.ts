@@ -1,12 +1,13 @@
 const EMPTY_VALUE = '—'
 
-export function formatDate(iso: string): string {
+export function formatDate(iso: string, withYear = false): string {
   const date = new Date(iso)
   if (Number.isNaN(date.getTime())) return EMPTY_VALUE
 
   return date.toLocaleString('ru-RU', {
     day: 'numeric',
     month: 'short',
+    year: withYear ? 'numeric' : undefined,
     hour: '2-digit',
     minute: '2-digit',
   })

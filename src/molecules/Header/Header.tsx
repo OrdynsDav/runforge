@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className="header">
       <Container>
-        <div className="breadcrumbs">
+        <div className="header__breadcrumbs">
           <Text>Project / web-platform</Text>
         </div>
         <Text variant="display">Runs</Text>

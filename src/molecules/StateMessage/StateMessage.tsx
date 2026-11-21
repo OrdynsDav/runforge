@@ -16,7 +16,7 @@ export default function StateMessage({
 }: StateMessageProps) {
   return (
     <div className="state-message">
-      <Text as="h2" variant="bodyStrong">
+      <Text as="h2" variant="title">
         {title}
       </Text>
       <Text as="p" variant="caption">

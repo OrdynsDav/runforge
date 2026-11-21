@@ -1,0 +1,9 @@
+.dashboard-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-page main {
+    flex: 1;
+    padding-bottom: 20px;
+}

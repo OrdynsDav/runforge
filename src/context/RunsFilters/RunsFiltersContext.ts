@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import type { RunsFilters, StatusFilter } from '../utils/filterRuns'
+import type { RunsFilters, StatusFilter } from '../../utils/filterRuns'
 
 export type RunsFiltersContextValue = RunsFilters & {
   setQuery: (query: string) => void

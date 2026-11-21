@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react'
-import { RunsFiltersContext } from '../context/RunsFiltersContext'
 import { countByStatus, filterRuns } from '../utils/filterRuns'
 import type { Run } from '../types/run'
+import { RunsFiltersContext } from '../context/RunsFilters/RunsFiltersContext'
 
 export function useRunsFilters() {
   const context = useContext(RunsFiltersContext)

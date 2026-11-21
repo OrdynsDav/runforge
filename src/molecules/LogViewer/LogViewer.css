@@ -1,0 +1,14 @@
+.log-viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.log-viewer .log-viewer__output {
+  padding: 0.875rem;
+  border-radius: 0.625rem;
+  background: var(--color-code, #0b1a33);
+  color: var(--color-code-text, #e8e4da);
+  white-space: pre-wrap;
+  overflow-x: auto;
+}

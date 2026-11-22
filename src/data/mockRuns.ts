@@ -85,6 +85,5 @@ export const MOCK_RUNS: Run[] = [
       '17:22:10 agent: generating token map',
       '17:26:01 lint ok, build ok',
     ],
-    // result намеренно нет: интерфейс должен это пережить
   },
 ]

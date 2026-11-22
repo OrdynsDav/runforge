@@ -1,4 +1,3 @@
-import React from "react";
 import type { IconProps } from "../types";
 
 export default function SettingsIcon({ width = 24, height = 24 }: IconProps) {

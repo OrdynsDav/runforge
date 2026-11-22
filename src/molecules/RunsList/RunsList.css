@@ -1,11 +1,10 @@
 .runs-list {
-  /* 16px при ширине секции 960px и больше -> 8px при 672px (42rem) */
   --cell-padding-inline: clamp(0.5rem, -0.667rem + 2.778cqw, 1rem);
 
   width: 100%;
-  table-layout: auto; /* колонки растут под содержимое, ячейки не налезают друг на друга */
+  table-layout: auto;
   border-collapse: separate;
-  border-spacing: 0 0.5rem; /* промежутки между строками */
+  border-spacing: 0 0.5rem;
 }
 
 /* Подпись таблицы нужна скринридерам, визуально скрыта */
@@ -25,18 +24,20 @@
   white-space: nowrap;
 }
 
-/* Гибкие колонки делят оставшееся место */
-.runs-list__col--name { width: 45%; }
-.runs-list__col--repo { width: 35%; }
+.runs-list__col--name {
+  width: 45%;
+}
+.runs-list__col--repo {
+  width: 35%;
+}
 
-/* Колонки с короткими данными: ширина по содержимому */
 .runs-list__col--status,
 .runs-list__col--created,
 .runs-list__col--duration {
   width: 1%;
 }
 
-/* Секция уже не вмещает таблицу: переходим на карточки */
+/* Секция уже не вмещает таблицу: переход на карточки */
 @container runs (max-width: 42rem) {
   .runs-list,
   .runs-list tbody {

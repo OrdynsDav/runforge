@@ -8,7 +8,6 @@ type FetchRunsOptions = {
   shouldFail?: boolean
 }
 
-/** Имитация запроса к backend: возвращает Promise с задержкой, чтобы было видно загрузку. */
 export function fetchRuns({
   dataset = 'default',
   delayMs = 900,
@@ -20,7 +19,7 @@ export function fetchRuns({
         reject(new Error('Runs service is unavailable (503). Please try again.'))
         return
       }
-      // копия, чтобы компоненты не могли случайно мутировать исходные данные
+      
       resolve(structuredClone(getMockRuns(dataset)))
     }, delayMs)
   })

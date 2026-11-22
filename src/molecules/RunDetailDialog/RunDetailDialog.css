@@ -17,7 +17,6 @@
   color: var(--color-text, #0b1a33);
   overflow-y: auto;
 
-  /* закрытое состояние: сдвинут вправо за экран */
   transform: translateX(100%);
   transition:
     transform var(--sidebar-duration) ease,

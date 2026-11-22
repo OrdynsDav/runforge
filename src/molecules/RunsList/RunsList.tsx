@@ -18,7 +18,7 @@ export default function RunsList({
 }: RunsListProps) {
   return (
     <table className="runs-list">
-      <caption className="runs-list__caption">Runs</caption>
+      <caption className="runs-list__caption">Запуски</caption>
 
       <colgroup>
         <col className="runs-list__col runs-list__col--name" />

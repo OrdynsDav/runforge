@@ -10,7 +10,6 @@
   --row-border-color: var(--color-text, #0b1a33);
 }
 
-/* после hover, чтобы выбранная строка сохраняла свой цвет */
 .run-card--selected {
   --row-border-color: var(--color-accent, #0b1a33);
   --row-bg: var(--color-card-selected, #fff);
@@ -32,19 +31,16 @@
   outline: none;
 }
 
-/* ---------- Десктоп (по умолчанию): таблица со строками-«плашками» ---------- */
+/* ---------- Десктоп  ---------- */
 .run-card td {
   padding: 0.875rem var(--cell-padding-inline, 1rem);
   background: var(--row-bg);
   vertical-align: middle;
-
-  /* верхняя и нижняя линии рамки */
   box-shadow:
     inset 0 1px 0 var(--row-border-color),
     inset 0 -1px 0 var(--row-border-color);
 }
 
-/* левая линия + скругление */
 .run-card td:first-child {
   border-radius: 0.75rem 0 0 0.75rem;
   box-shadow:
@@ -53,7 +49,6 @@
     inset 1px 0 0 var(--row-border-color);
 }
 
-/* правая линия + скругление */
 .run-card td:last-child {
   border-radius: 0 0.75rem 0.75rem 0;
   box-shadow:
@@ -62,9 +57,6 @@
     inset -1px 0 0 var(--row-border-color);
 }
 
-/* Усечение длинного текста.
-   max-width: 0 не даёт тексту растягивать колонку: ширину задают проценты в RunsList.css.
-   min-width оставляет название читаемым, даже когда места мало. */
 .run-card__name,
 .run-card__repo {
   max-width: 0;
@@ -81,7 +73,6 @@
   white-space: nowrap;
 }
 
-/* короткие данные не переносятся, их колонки подстраиваются под ширину (см. RunsList.css) */
 .run-card__status,
 .run-card__created,
 .run-card__duration {
@@ -105,7 +96,6 @@
     background: var(--row-bg);
   }
 
-  /* сброс десктопных стилей ячеек */
   .run-card td,
   .run-card td:first-child,
   .run-card td:last-child {
@@ -122,15 +112,19 @@
   .run-card__name {
     grid-area: name;
   }
+
   .run-card__repo {
     grid-area: repo;
   }
+
   .run-card__status {
     grid-area: badge;
   }
+
   .run-card__created {
     grid-area: created;
   }
+
   .run-card__duration {
     grid-area: duration;
     justify-self: end;

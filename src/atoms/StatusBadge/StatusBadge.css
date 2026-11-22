@@ -8,7 +8,6 @@
   border-radius: 999px;
 }
 
-/* двойной класс, чтобы цвет перебивал .text из Text.css независимо от порядка подключения */
 .status-badge.status-badge--queued {
   border: 1px dashed #7d8597;
 

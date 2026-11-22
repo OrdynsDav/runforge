@@ -1,58 +1,117 @@
 .run-card {
-  display: grid;
-  grid-template-columns: var(--runs-columns);
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  padding: 0.875rem 1rem;
-  border: 1px solid var(--color-border-subtle, #e1dbcf);
-  border-radius: 0.75rem;
-  background: var(--color-card, #fbf9f4);
-  color: var(--color-text, #0b1a33);
+  --row-border-color: var(--color-border-subtle, #e1dbcf);
+  --row-bg: var(--color-card, #fbf9f4);
+
+  cursor: pointer;
+}
+
+.run-card:hover,
+.run-card:focus-within {
+  --row-border-color: var(--color-text, #0b1a33);
+}
+
+/* после hover, чтобы выбранная строка сохраняла свой цвет */
+.run-card--selected {
+  --row-border-color: var(--color-accent, #0b1a33);
+  --row-bg: var(--color-card-selected, #fff);
+}
+
+.run-card__button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
   font: inherit;
   text-align: left;
   cursor: pointer;
 }
 
-.run-card:hover {
-  border-color: var(--color-text, #0b1a33);
+.run-card__button:focus-visible {
+  outline: none;
 }
 
-.run-card:focus-visible {
-  outline: 2px solid var(--color-text, #0b1a33);
-  outline-offset: 2px;
+/* ---------- Десктоп (по умолчанию): таблица со строками-«плашками» ---------- */
+.run-card td {
+  padding: 0.875rem var(--cell-padding-inline, 1rem);
+  background: var(--row-bg);
+  vertical-align: middle;
+
+  /* верхняя и нижняя линии рамки */
+  box-shadow:
+    inset 0 1px 0 var(--row-border-color),
+    inset 0 -1px 0 var(--row-border-color);
 }
 
-.run-card--selected {
-  background: var(--color-card-selected, #f7f4ee);
-  border-color: var(--color-accent, #0b1a33);
+/* левая линия + скругление */
+.run-card td:first-child {
+  border-radius: 0.75rem 0 0 0.75rem;
+  box-shadow:
+    inset 0 1px 0 var(--row-border-color),
+    inset 0 -1px 0 var(--row-border-color),
+    inset 1px 0 0 var(--row-border-color);
 }
 
-/* 700px */
-@media (max-width: 43.75rem) {
+/* правая линия + скругление */
+.run-card td:last-child {
+  border-radius: 0 0.75rem 0.75rem 0;
+  box-shadow:
+    inset 0 1px 0 var(--row-border-color),
+    inset 0 -1px 0 var(--row-border-color),
+    inset -1px 0 0 var(--row-border-color);
+}
+
+/* Название и репозиторий переносятся по словам. Слово рвётся посреди,
+   только если оно одно и не помещается совсем. */
+.run-card__name,
+.run-card__repo {
+  overflow-wrap: break-word;
+}
+
+/* Запас места под название: два-три слова в строке */
+.run-card__name {
+  min-width: 8rem;
+}
+
+/* короткие данные не переносятся, их колонки подстраиваются под ширину (см. RunsList.css) */
+.run-card__status,
+.run-card__created,
+.run-card__duration {
+  white-space: nowrap;
+}
+
+/* ---------- Узкая секция: строка превращается в карточку ---------- */
+@container runs (max-width: 42rem) {
   .run-card {
+    display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
-      "name badge"
-      "repo repo"
-      "created duration";
+      'name badge'
+      'repo repo'
+      'created duration';
     gap: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--row-border-color);
+    border-radius: 0.75rem;
+    background: var(--row-bg);
   }
 
-  .run-card__name {
-    grid-area: name;
+  /* сброс десктопных стилей ячеек */
+  .run-card td,
+  .run-card td:first-child,
+  .run-card td:last-child {
+    display: block;
+    min-width: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    white-space: normal;
   }
-  .run-card__repo {
-    grid-area: repo;
-  }
-  .run-card .status-badge {
-    grid-area: badge;
-  }
-  .run-card__created {
-    grid-area: created;
-  }
-  .run-card__duration {
-    grid-area: duration;
-    justify-self: end;
-  }
+
+  .run-card__name { grid-area: name; }
+  .run-card__repo { grid-area: repo; }
+  .run-card__status { grid-area: badge; }
+  .run-card__created { grid-area: created; }
+  .run-card__duration { grid-area: duration; justify-self: end; }
 }

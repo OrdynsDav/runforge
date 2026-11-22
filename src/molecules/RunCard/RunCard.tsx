@@ -1,9 +1,9 @@
-import StatusBadge from "../../atoms/StatusBadge/StatusBadge";
 import { Text } from "../../atoms/Text/Text";
+import StatusBadge from "../../atoms/StatusBadge/StatusBadge";
+import "./RunCard.css";
 import type { Run } from "../../types/run";
 import { clsx } from "../../utils/clsx";
 import { formatDate, formatDuration } from "../../utils/format";
-import "./RunCard.css";
 
 type RunCardProps = {
   run: Run;
@@ -13,27 +13,45 @@ type RunCardProps = {
 
 export default function RunCard({ run, isSelected, onSelect }: RunCardProps) {
   return (
-    <button
-      type="button"
+    <tr
       className={clsx("run-card", isSelected && "run-card--selected")}
       aria-current={isSelected ? "true" : undefined}
       onClick={() => onSelect(run.id)}
     >
-      <Text variant="bodyStrong" className="run-card__name">
-        {run.name}
-      </Text>
-      <Text variant="caption" className="run-card__repo">
-        {run.repository}
+      <td className="run-card__name">
+        {/* Настоящая кнопка: фокус и Enter/Space работают с клавиатуры, клик всплывает до <tr> */}
+        <button type="button" className="run-card__button">
+          <Text as="span" variant="bodyStrong">
+            {run.name}
+          </Text>
+        </button>
+      </td>
+
+      <td className="run-card__repo">
+        <Text variant="bodyStrong">
+          {run.repository}
+        </Text>
         <br />
-        {run.branch}
-      </Text>
-      <StatusBadge status={run.status} />
-      <Text variant="caption" className="run-card__created">
-        {formatDate(run.createdAt)}
-      </Text>
-      <Text variant="caption" className="run-card__duration">
-        {formatDuration(run.durationSeconds)}
-      </Text>
-    </button>
+        <Text as="span" variant="caption">
+          {run.branch}
+        </Text>
+      </td>
+
+      <td className="run-card__status">
+        <StatusBadge status={run.status} />
+      </td>
+
+      <td className="run-card__created">
+        <Text as="time" variant="caption" dateTime={run.createdAt}>
+          {formatDate(run.createdAt)}
+        </Text>
+      </td>
+
+      <td className="run-card__duration">
+        <Text as="span" variant="caption">
+          {formatDuration(run.durationSeconds)}
+        </Text>
+      </td>
+    </tr>
   );
 }

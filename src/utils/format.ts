@@ -21,5 +21,5 @@ export function formatDuration(seconds?: number): string {
   const rest = total % 60
 
   if (minutes === 0) return `${rest} с`
-  return `${minutes} мин ${String(rest).padStart(2, '0')} с`
+  return `${minutes}:${String(rest).padStart(2, '0')}`
 }

@@ -1,11 +1,11 @@
-.run-detail-sidebar {
+.run-detail-dialog {
   --sidebar-duration: 0.3s;
 
   position: fixed;
   inset: 0 0 0 auto;
   display: flex;
   flex-direction: column;
-  width: min(25rem, 100%); /* 400px из макета; на узких экранах на всю ширину */
+  width: min(25rem, 100%);
   max-width: 100%;
   height: 100%;
   max-height: none;
@@ -25,18 +25,17 @@
     display var(--sidebar-duration) allow-discrete;
 }
 
-.run-detail-sidebar[open] {
+.run-detail-dialog[open] {
   transform: translateX(0);
 }
 
-/* начальное состояние при открытии: откуда стартует анимация */
 @starting-style {
-  .run-detail-sidebar[open] {
+  .run-detail-dialog[open] {
     transform: translateX(100%);
   }
 }
 
-.run-detail-sidebar::backdrop {
+.run-detail-dialog::backdrop {
   background: rgba(11, 26, 51, 0);
   transition:
     background-color var(--sidebar-duration) ease,
@@ -44,25 +43,26 @@
     display var(--sidebar-duration) allow-discrete;
 }
 
-.run-detail-sidebar[open]::backdrop {
+.run-detail-dialog[open]::backdrop {
   background: rgba(11, 26, 51, 0.45);
 }
 
 @starting-style {
-  .run-detail-sidebar[open]::backdrop {
+  .run-detail-dialog[open]::backdrop {
     background: rgba(11, 26, 51, 0);
   }
 }
 
-.run-detail-sidebar__wrapper {
+.run-detail-dialog__wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.125rem;
   padding: 1.75rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
+  flex: 1;
 }
 
-.run-detail-sidebar__close {
+.run-detail-dialog__close {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -78,50 +78,50 @@
   cursor: pointer;
 }
 
-.run-detail-sidebar__header {
+.run-detail-dialog__header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.75rem;
 }
 
-.run-detail-sidebar__close:focus-visible {
-  outline: 2px solid var(--color-text, #0b1a33);
-  outline-offset: 2px;
+.run-detail-dialog__close:focus-visible {
+  outline: 1px solid var(--color-text, #0b1a33);
+  border-radius: 0.5rem;
 }
 
-.run-detail-sidebar__meta {
+.run-detail-dialog__meta {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5rem 1rem;
   margin: 0;
 }
 
-.run-detail-sidebar__result {
+.run-detail-dialog__result {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.run-detail-sidebar .run-detail-sidebar__result-text {
+.run-detail-dialog .run-detail-dialog__result-text {
   padding: 0.875rem;
   border: 1px solid var(--color-border-subtle, #e1dbcf);
   border-radius: 0.625rem;
   background: var(--color-field, #fff);
 }
 
-.run-detail-sidebar__actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid var(--color-border);
-    margin-top: auto;
-    padding-block: 1rem;
+.run-detail-dialog__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--color-border);
+  margin-top: auto;
+  padding-block: 1rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .run-detail-sidebar,
-  .run-detail-sidebar::backdrop {
+  .run-detail-dialog,
+  .run-detail-dialog::backdrop {
     transition: none;
   }
 }

@@ -1,31 +1,27 @@
-import { MOCK_RUNS } from "../data/mockRuns";
-import type { Run } from "../types/run";
-
-const MOCK_DELAY_MS = 900;
+import { getMockRuns } from '../data/mockDatasets'
+import type { MockDataset } from '../types/devSettings'
+import type { Run } from '../types/run'
 
 type FetchRunsOptions = {
-  shouldFail?: boolean;
-};
+  dataset?: MockDataset
+  delayMs?: number
+  shouldFail?: boolean
+}
 
 /** Имитация запроса к backend: возвращает Promise с задержкой, чтобы было видно загрузку. */
 export function fetchRuns({
+  dataset = 'default',
+  delayMs = 900,
   shouldFail = false,
 }: FetchRunsOptions = {}): Promise<Run[]> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldFail) {
-        reject(
-          new Error("Runs service is unavailable (503). Please try again."),
-        );
-        return;
+        reject(new Error('Runs service is unavailable (503). Please try again.'))
+        return
       }
       // копия, чтобы компоненты не могли случайно мутировать исходные данные
-      resolve(structuredClone(MOCK_RUNS));
-    }, MOCK_DELAY_MS);
-  });
-}
-
-/** Ошибку можно посмотреть, открыв страницу с параметром ?mockError */
-export function isMockErrorEnabled(): boolean {
-  return new URLSearchParams(window.location.search).has("mockError");
+      resolve(structuredClone(getMockRuns(dataset)))
+    }, delayMs)
+  })
 }

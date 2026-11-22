@@ -1,3 +1,7 @@
+.runs-section {
+  container: runs / inline-size;
+}
+
 .runs-section__skeleton {
   display: flex;
   flex-direction: column;
@@ -12,13 +16,9 @@
 }
 
 @keyframes runs-section-pulse {
-  50% {
-    opacity: 0.45;
-  }
+  50% { opacity: 0.45; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .runs-section__skeleton-row {
-    animation: none;
-  }
+  .runs-section__skeleton-row { animation: none; }
 }

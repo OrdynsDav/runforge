@@ -17,26 +17,39 @@ export default function RunsList({
   onSelectRun,
 }: RunsListProps) {
   return (
-    <div className="runs-list">
-      <div className="runs-list__head" aria-hidden="true">
-        {COLUMNS.map((column) => (
-          <Text key={column} variant="label">
-            {column}
-          </Text>
-        ))}
-      </div>
+    <table className="runs-list">
+      <caption className="runs-list__caption">Runs</caption>
 
-      <ul className="runs-list__items">
+      <colgroup>
+        <col className="runs-list__col runs-list__col--name" />
+        <col className="runs-list__col runs-list__col--repo" />
+        <col className="runs-list__col runs-list__col--status" />
+        <col className="runs-list__col runs-list__col--created" />
+        <col className="runs-list__col runs-list__col--duration" />
+      </colgroup>
+
+      <thead className="runs-list__head">
+        <tr>
+          {COLUMNS.map((column) => (
+            <th key={column} scope="col" className="runs-list__th">
+              <Text as="span" variant="label">
+                {column}
+              </Text>
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
         {runs.map((run) => (
-          <li key={run.id}>
-            <RunCard
-              run={run}
-              isSelected={run.id === selectedRunId}
-              onSelect={onSelectRun}
-            />
-          </li>
+          <RunCard
+            key={run.id}
+            run={run}
+            isSelected={run.id === selectedRunId}
+            onSelect={onSelectRun}
+          />
         ))}
-      </ul>
-    </div>
+      </tbody>
+    </table>
   );
 }

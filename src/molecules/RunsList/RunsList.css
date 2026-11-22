@@ -1,28 +1,58 @@
-/* RunsList.css */
 .runs-list {
-  /* 2fr 1.4fr 1.2fr 1fr .8fr из макета; minmax(0, ...) не даёт длинным названиям распирать сетку */
-  --runs-columns: minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1.2fr)
-    minmax(0, 1fr) minmax(0, 0.8fr);
+  /* 16px при ширине секции 960px и больше -> 8px при 672px (42rem) */
+  --cell-padding-inline: clamp(0.5rem, -0.667rem + 2.778cqw, 1rem);
+
+  width: 100%;
+  table-layout: auto; /* колонки растут под содержимое, ячейки не налезают друг на друга */
+  border-collapse: separate;
+  border-spacing: 0 0.5rem; /* промежутки между строками */
 }
 
-.runs-list__head {
-  display: grid;
-  grid-template-columns: var(--runs-columns);
-  gap: 1rem;
-  padding: 0 1rem 0.5rem;
+/* Подпись таблицы нужна скринридерам, визуально скрыта */
+.runs-list__caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
-.runs-list__items {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.runs-list__th {
+  padding: 0 var(--cell-padding-inline) 0.25rem;
+  font-weight: 400;
+  text-align: left;
+  white-space: nowrap;
 }
 
-@media (max-width: 43.75rem) {
-  .runs-list__head {
+/* Гибкие колонки делят оставшееся место */
+.runs-list__col--name { width: 45%; }
+.runs-list__col--repo { width: 35%; }
+
+/* Колонки с короткими данными: ширина по содержимому */
+.runs-list__col--status,
+.runs-list__col--created,
+.runs-list__col--duration {
+  width: 1%;
+}
+
+/* Секция уже не вмещает таблицу: переходим на карточки */
+@container runs (max-width: 42rem) {
+  .runs-list,
+  .runs-list tbody {
+    display: block;
+  }
+
+  .runs-list__col {
     display: none;
+  }
+
+  /* Шапка скрыта визуально, но остаётся в DOM */
+  .runs-list__head {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
   }
 }

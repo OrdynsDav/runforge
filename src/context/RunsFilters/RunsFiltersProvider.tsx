@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState, type ReactNode } from 'react'
-import type { RunsFilters, StatusFilter } from '../utils/filterRuns'
 import { RunsFiltersContext } from './RunsFiltersContext'
+import type { RunsFilters, StatusFilter } from '../../utils/filterRuns'
 
 const INITIAL_FILTERS: RunsFilters = { query: '', status: 'all' }
 

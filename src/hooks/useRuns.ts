@@ -1,53 +1,52 @@
-import { useCallback, useEffect, useState } from "react";
-import { fetchRuns, isMockErrorEnabled } from "../api/runsApi";
-import type { Run } from "../types/run";
+import { useCallback, useEffect, useState } from 'react'
+import { fetchRuns } from '../api/runsApi'
+import { useDevSettings } from './useDevSettings'
+import type { Run } from '../types/run'
 
-type RunsState = {
-  runs: Run[];
-  isLoading: boolean;
-  error: string | null;
-};
+type RunsResult = {
+  key: string
+  runs: Run[]
+  error: string | null
+}
 
 function getErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : "Something went wrong.";
+  return error instanceof Error ? error.message : 'Something went wrong.'
 }
 
 export function useRuns() {
-  const [state, setState] = useState<RunsState>({
-    runs: [],
-    isLoading: true,
-    error: null,
-  });
-  const [attempt, setAttempt] = useState(0);
+  const { settings, reloadToken } = useDevSettings()
+  const { dataset, delayMs, failRequests } = settings
+
+  const [attempt, setAttempt] = useState(0)
+  const [result, setResult] = useState<RunsResult | null>(null)
+
+  // любое изменение настроек или повтор даёт новый ключ и новый запрос
+  const requestKey = `${dataset}|${delayMs}|${failRequests}|${reloadToken}|${attempt}`
 
   useEffect(() => {
-    let isCancelled = false;
+    let isCancelled = false
 
-    // с ?mockError первая попытка падает, повтор («Try again») проходит
-    const shouldFail = isMockErrorEnabled() && attempt === 0;
-
-    fetchRuns({ shouldFail })
+    fetchRuns({ dataset, delayMs, shouldFail: failRequests })
       .then((runs) => {
-        if (!isCancelled) setState({ runs, isLoading: false, error: null });
+        if (!isCancelled) setResult({ key: requestKey, runs, error: null })
       })
       .catch((error: unknown) => {
-        if (!isCancelled)
-          setState({
-            runs: [],
-            isLoading: false,
-            error: getErrorMessage(error),
-          });
-      });
+        if (!isCancelled) setResult({ key: requestKey, runs: [], error: getErrorMessage(error) })
+      })
 
     return () => {
-      isCancelled = true;
-    };
-  }, [attempt]);
+      isCancelled = true
+    }
+  }, [requestKey, dataset, delayMs, failRequests])
 
-  const reload = useCallback(() => {
-    setState((prev) => ({ ...prev, isLoading: true, error: null }));
-    setAttempt((value) => value + 1);
-  }, []);
+  const reload = useCallback(() => setAttempt((value) => value + 1), [])
 
-  return { ...state, reload };
+  const isLoading = result?.key !== requestKey
+
+  return {
+    runs: result?.runs ?? [],
+    isLoading,
+    error: isLoading ? null : (result?.error ?? null),
+    reload,
+  }
 }

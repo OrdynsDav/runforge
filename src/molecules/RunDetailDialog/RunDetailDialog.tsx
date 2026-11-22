@@ -72,7 +72,7 @@ export default function RunDetailDialog({
     >
       <div className="run-detail-dialog__wrapper">
         <div className="run-detail-dialog__header">
-          <Text as="h2" variant="title" id="run-detail-title">
+          <Text variant="title" id="run-detail-title">
             {run.name}
           </Text>
           <button

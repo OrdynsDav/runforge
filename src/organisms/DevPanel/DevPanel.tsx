@@ -46,11 +46,11 @@ export default function DevPanel() {
       {isExpanded && (
         <div id={panelId} className="dev-panel__body" role="region" aria-label="Developer settings">
           <section className="dev-panel__section">
-            <Text as="h2" variant="label">
+            <Text variant="title">
               Data
             </Text>
             <label className="dev-panel__field">
-              <Text as="span" variant="caption">
+              <Text variant="caption">
                 Dataset
               </Text>
               <select
@@ -68,11 +68,11 @@ export default function DevPanel() {
           </section>
 
           <section className="dev-panel__section">
-            <Text as="h2" variant="label">
+            <Text variant="title">
               Network
             </Text>
             <div className="dev-panel__field">
-              <Text as="span" variant="caption">
+              <Text variant="caption">
                 Delay
               </Text>
               <div className="dev-panel__chips" role="group" aria-label="Request delay">
@@ -105,7 +105,7 @@ export default function DevPanel() {
           </section>
 
           <section className="dev-panel__section">
-            <Text as="h2" variant="label">
+            <Text variant="title">
               State
             </Text>
             <dl className="dev-panel__state">

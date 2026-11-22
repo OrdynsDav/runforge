@@ -20,19 +20,28 @@ export default function RunCard({ run, isSelected, onSelect }: RunCardProps) {
     >
       <td className="run-card__name">
         {/* Настоящая кнопка: фокус и Enter/Space работают с клавиатуры, клик всплывает до <tr> */}
-        <button type="button" className="run-card__button">
-          <Text as="span" variant="bodyStrong">
+        <button type="button" className="run-card__button" title={run.name}>
+          <Text as="span" variant="bodyStrong" className="run-card__truncate">
             {run.name}
           </Text>
         </button>
       </td>
 
       <td className="run-card__repo">
-        <Text variant="bodyStrong">
+        <Text
+          as="span"
+          variant="bodyStrong"
+          className="run-card__truncate"
+          title={run.repository}
+        >
           {run.repository}
         </Text>
-        <br />
-        <Text as="span" variant="caption">
+        <Text
+          as="span"
+          variant="caption"
+          className="run-card__truncate"
+          title={run.branch}
+        >
           {run.branch}
         </Text>
       </td>

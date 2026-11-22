@@ -17,6 +17,8 @@
 }
 
 .run-card__button {
+  display: block;
+  width: 100%;
   padding: 0;
   border: 0;
   background: none;
@@ -60,16 +62,23 @@
     inset -1px 0 0 var(--row-border-color);
 }
 
-/* Название и репозиторий переносятся по словам. Слово рвётся посреди,
-   только если оно одно и не помещается совсем. */
+/* Усечение длинного текста.
+   max-width: 0 не даёт тексту растягивать колонку: ширину задают проценты в RunsList.css.
+   min-width оставляет название читаемым, даже когда места мало. */
 .run-card__name,
 .run-card__repo {
-  overflow-wrap: break-word;
+  max-width: 0;
 }
 
-/* Запас места под название: два-три слова в строке */
 .run-card__name {
   min-width: 8rem;
+}
+
+.run-card__truncate {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* короткие данные не переносятся, их колонки подстраиваются под ширину (см. RunsList.css) */
@@ -85,9 +94,9 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
-      'name badge'
-      'repo repo'
-      'created duration';
+      "name badge"
+      "repo repo"
+      "created duration";
     gap: 0.5rem 0.75rem;
     margin-bottom: 0.5rem;
     padding: 0.875rem 1rem;
@@ -102,6 +111,7 @@
   .run-card td:last-child {
     display: block;
     min-width: 0;
+    max-width: none;
     padding: 0;
     border-radius: 0;
     background: none;
@@ -109,9 +119,20 @@
     white-space: normal;
   }
 
-  .run-card__name { grid-area: name; }
-  .run-card__repo { grid-area: repo; }
-  .run-card__status { grid-area: badge; }
-  .run-card__created { grid-area: created; }
-  .run-card__duration { grid-area: duration; justify-self: end; }
+  .run-card__name {
+    grid-area: name;
+  }
+  .run-card__repo {
+    grid-area: repo;
+  }
+  .run-card__status {
+    grid-area: badge;
+  }
+  .run-card__created {
+    grid-area: created;
+  }
+  .run-card__duration {
+    grid-area: duration;
+    justify-self: end;
+  }
 }

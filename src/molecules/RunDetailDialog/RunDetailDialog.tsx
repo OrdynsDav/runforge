@@ -5,7 +5,7 @@ import { Text } from "../../atoms/Text/Text";
 import CloseIcon from "../../atoms/Icons/CloseIcon";
 import StatusBadge from "../../atoms/StatusBadge/StatusBadge";
 import LogViewer from "../LogViewer/LogViewer";
-import "./RunDetailDialog.css"
+import "./RunDetailDialog.css";
 
 type RunDetailDialogProps = {
   run: Run;
@@ -112,7 +112,7 @@ export default function RunDetailDialog({
             tone={run.result ? "default" : "muted"}
             className="run-detail-dialog__result-text"
           >
-            {run.result ?? "No result yet."}
+            {run.result ?? "Нет результатов"}
           </Text>
         </div>
       </div>

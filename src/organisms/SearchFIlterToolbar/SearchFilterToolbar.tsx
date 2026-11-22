@@ -1,18 +1,21 @@
+import { useEffect, useState } from "react";
+import { useDebouncedValue } from "../../hooks/useDebouncedValue";
 import { useRunsFilters } from "../../hooks/useRunsFilters";
 import { clsx } from "../../utils/clsx";
 import type { StatusFilter } from "../../utils/filterRuns";
 import "./SearchFilterToolbar.css";
 
+const SEARCH_DEBOUNCE_MS = 300;
+
 const FILTER_OPTIONS: { value: StatusFilter; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "queued", label: "Queued" },
-  { value: "running", label: "Running" },
-  { value: "succeeded", label: "Succeeded" },
-  { value: "failed", label: "Failed" },
+  { value: "all", label: "Все" },
+  { value: "queued", label: "В очереди" },
+  { value: "running", label: "Выполняется" },
+  { value: "succeeded", label: "Успешно" },
+  { value: "failed", label: "Ошибка" },
 ];
 
 type SearchFilterToolbarProps = {
-  /** Счётчики на чипах. Пока данные грузятся, можно не передавать. */
   counts?: Record<StatusFilter, number>;
   className?: string;
 };
@@ -23,14 +26,31 @@ export default function SearchFilterToolbar({
 }: SearchFilterToolbarProps) {
   const { query, status, setQuery, setStatus } = useRunsFilters();
 
+  // То, что сейчас в поле. В общий фильтр уходит только устоявшееся значение.
+  const [inputValue, setInputValue] = useState(query);
+  const debouncedValue = useDebouncedValue(inputValue, SEARCH_DEBOUNCE_MS);
+
+  useEffect(() => {
+    setQuery(debouncedValue);
+  }, [debouncedValue, setQuery]);
+
+  // Внешний сброс 
+  const [previousQuery, setPreviousQuery] = useState(query);
+
+  if (query !== previousQuery) {
+    setPreviousQuery(query);
+
+    if (query !== debouncedValue) setInputValue(query);
+  }
+
   return (
     <div className={clsx("search-filter-toolbar", className)}>
       <input
         className="search-filter-toolbar__search"
         type="search"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder="Search by run or repository"
+        value={inputValue}
+        onChange={(event) => setInputValue(event.target.value)}
+        placeholder="Поиск по названию или репозиторию"
         aria-label="Поиск по названию или репозиторию"
       />
 

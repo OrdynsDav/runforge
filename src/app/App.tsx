@@ -1,11 +1,11 @@
 import { DevSettingsProvider } from "../context/DevSettings/DevSettingsProvider";
-import { DashboardPage } from "../pages/DashboardPage/DashboardPage";
+import { RunsPage } from "../pages/RunsPage/RunsPage";
 import "./App.css";
 
 function App() {
   return (
     <DevSettingsProvider>
-      <DashboardPage />
+      <RunsPage />
     </DevSettingsProvider>
   );
 }

@@ -38,23 +38,23 @@ export default function RunsSection({
         </div>
       ) : error ? (
         <StateMessage
-          title="Couldn’t load runs"
+          title="Не удалось загрузить"
           description={error}
-          actionLabel="Try again"
+          actionLabel="Попробовать снова"
           onAction={onRetry}
         />
       ) : runs.length === 0 ? (
         hasActiveFilters ? (
           <StateMessage
-            title="No runs found"
-            description="Nothing matches the current search and filter."
-            actionLabel="Reset search and filters"
+            title="Ничего не найдено"
+            description="Ничто не соответствует текущему поиску и фильтру."
+            actionLabel="Сбросить фильтры и поиск"
             onAction={resetFilters}
           />
         ) : (
           <StateMessage
-            title="No runs yet"
-            description="New runs will appear here."
+            title="Пусто"
+            description="Здесь будут новые запуски"
           />
         )
       ) : (

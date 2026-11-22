@@ -9,10 +9,10 @@ import CircleIcon from "../Icons/CircleIcon";
 import CloseIcon from "../Icons/CloseIcon";
 
 const STATUS_META: Record<RunStatus, { label: string; icon: ReactNode }> = {
-  queued: { label: "Queued", icon: <CircleIcon /> },
-  running: { label: "Running", icon: <CircleLeftHalfBlackIcon /> },
-  succeeded: { label: "Succeeded", icon: <CheckIcon /> },
-  failed: { label: "Failed", icon: <CloseIcon /> },
+  queued: { label: "В очереди", icon: <CircleIcon /> },
+  running: { label: "Выполняется", icon: <CircleLeftHalfBlackIcon /> },
+  succeeded: { label: "Успешно", icon: <CheckIcon /> },
+  failed: { label: "Ошибка", icon: <CloseIcon /> },
 };
 
 export default function StatusBadge({ status }: { status: RunStatus }) {

@@ -3,13 +3,13 @@ import { RunDetailProvider } from "../../context/RunDetail/RunDetailProvider";
 import { RunsFiltersProvider } from "../../context/RunsFilters/RunsFiltersProvider";
 import Header from "../../molecules/Header/Header";
 import { RunsContent } from "../../organisms/RunsContent/RunsContent";
-import "./DashboardPage.css";
+import "./RunsPage.css";
 
 const DevPanel = lazy(() => import("../../organisms/DevPanel/DevPanel"));
 
-export const DashboardPage = () => {
+export const RunsPage = () => {
   return (
-    <div className="dashboard-page">
+    <div className="runs-page">
       <Header />
       <main>
         <RunsFiltersProvider>
